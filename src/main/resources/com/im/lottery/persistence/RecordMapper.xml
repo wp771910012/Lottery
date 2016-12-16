@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.im.lottery.persistence.RecordMapper">
+	<insert id="insert" parameterType="com.im.lottery.entity.Record"
+		useGeneratedKeys="true" keyProperty="recordId">
+		INSERT INTO t_record(
+		`name`,
+		`phone`,
+		`address`,
+		`prizeId`,
+		`status`,
+		`addTime`
+		)VALUES(
+		#{name},
+		#{phone},
+		#{address},
+		#{prizeId},
+		#{status},
+		#{addTime}
+		)
+	</insert>
+	<select id="findById" resultType="com.im.lottery.entity.Record">
+		SELECT * FROM t_record
+		<where>
+			`recordId`=#{recordId}
+		</where>
+	</select>
+	<select id="findAll" resultType="com.im.lottery.entity.Record">
+		SELECT * FROM t_record
+	</select>
+	<update id="update" parameterType="com.im.lottery.entity.Record">
+		UPDATE t_record SET
+		<if test="name!=null">
+			`name`=#{name},
+		</if>
+		<if test="address!=null">
+			`address`=#{address},
+		</if>
+		<if test="phone!=null">
+			`phone`=#{phone},
+		</if>
+		<if test="name!=null">
+			`name`=#{name},
+		</if>
+		`updateTime`=#{updateTime},
+		`status`=#{status}
+		<where>
+			recordId=#{recordId}
+		</where>
+	</update>
+</mapper>
